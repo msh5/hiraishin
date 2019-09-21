@@ -96,7 +96,7 @@ fn add_mark(alias: &str) -> Result<(), Error> {
 fn remove_mark(alias: &str) -> Result<(), Error> {
     let mut marks = load_from_listfile()?;
 
-    marks.retain(|x| x.alias == alias);
+    marks.retain(|x| x.alias != alias);
 
     save_to_listfile(&marks)?;
 
