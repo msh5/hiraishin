@@ -1,0 +1,15 @@
+[package]
+name = "hiraishin"
+version = "0.1.0"
+authors = ["sho.minagawa"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = "*"
+serde = "1.0.99"
+serde_derive = "*"
+serde_json = "1.0.40"
+dirs = "2.0.2"
+failure = "*"
