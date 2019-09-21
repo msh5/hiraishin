@@ -42,8 +42,8 @@ fn load_from_listfile() -> Result<Vec<Mark>, Error> {
     let filepath = build_listfile_path()?;
     ensure_dirs_created(&filepath)?;
 
-    let mut options = OpenOptions::new();
-    let file = match options.read(true).open(filepath) {
+    let result = OpenOptions::new().read(true).open(filepath);
+    let file = match result {
         Ok(f) => f,
         Err(e) => {
             return if e.kind() == NotFound {
@@ -64,8 +64,11 @@ fn save_to_listfile(marks: &Vec<Mark>) -> Result<(), Error> {
     let filepath = build_listfile_path()?;
     ensure_dirs_created(&filepath)?;
 
-    let mut options = OpenOptions::new();
-    let file = options.write(true).create(true).open(filepath)?;
+    let file = OpenOptions::new()
+        .write(true)
+        .truncate(true)
+        .create(true)
+        .open(filepath)?;
 
     let writer = BufWriter::new(file);
     serde_json::to_writer_pretty(writer, &marks)?;
