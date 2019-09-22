@@ -9,9 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Format codes
+      run: cargo fmt --all -- --check --verbose
     - name: Build
       run: cargo build --verbose
     - name: Run tests
       run: cargo test --verbose
-    - name: Format codes
-      run: cargo fmt --all -- --check --verbose
