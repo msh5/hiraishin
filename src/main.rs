@@ -141,7 +141,7 @@ _hiraishin ()
 
 fn main() {
     let app = App::new("Hiraishin")
-        .version("0.1")
+        .version("0.2.0")
         .author("Sho Minagawa <msh5.global@gmail.com>")
         .arg(
             Arg::with_name("mark")
