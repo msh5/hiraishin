@@ -139,6 +139,18 @@ _hiraishin ()
     println!("{}", rc);
 }
 
+fn output_configurations() -> Result<(), Error> {
+    let filepath = build_listfile_path()?;
+
+    let filepath_str = filepath
+        .to_str()
+        .ok_or(err_msg("failed to convert list-file path into string"))?;
+    println!("mark_list_filepath: {}", filepath_str);
+    println!("mark_list_format: json");
+
+    Ok(())
+}
+
 fn main() {
     let app = App::new("Hiraishin")
         .version("0.2.0")
@@ -183,6 +195,11 @@ fn main() {
             Arg::with_name("rc")
                 .long("rc")
                 .help("Output recommended .bashrc lines"),
+        )
+        .arg(
+            Arg::with_name("configs")
+                .long("configs")
+                .help("Output configurations"),
         );
     let matcher = app.get_matches();
 
@@ -203,5 +220,8 @@ fn main() {
     };
     if matcher.is_present("rc") {
         output_rc();
+    };
+    if matcher.is_present("configs") {
+        output_configurations().expect("Failed to execute configs command");
     };
 }
